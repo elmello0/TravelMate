@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/light_yellow"
+    android:gravity="center">
+
+    <!-- Imagen del icono de usuario -->
+    <ImageView
+        android:id="@+id/ivRegisterIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_member" />
+
+    <!-- Campo de correo -->
+    <EditText
+        android:id="@+id/etRegisterEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo de usuario -->
+    <EditText
+        android:id="@+id/etRegisterUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Usuario"
+        android:layout_marginTop="8dp" />
+
+    <!-- Campo de contraseña -->
+    <EditText
+        android:id="@+id/etRegisterPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp" />
+
+    <!-- Campo de repetir contraseña -->
+    <EditText
+        android:id="@+id/etRegisterConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp" />
+
+    <!-- Botón para crear cuenta -->
+    <Button
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear cuenta"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

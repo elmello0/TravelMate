@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <!-- Botón de regreso al inicio -->
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicio"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:background="@color/white" />
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/tvDocumentsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Documentos"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/btnBackHome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Lista de documentos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDocuments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvDocumentsTitle"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/fab_add_document" />
+
+    <!-- Botón flotante para añadir un nuevo documento -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_document"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/red"
+        android:contentDescription="Añadir documento" />
+</RelativeLayout>

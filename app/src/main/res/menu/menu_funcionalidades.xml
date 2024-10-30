@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_itineraries"
+        android:title="Itinerarios"
+        android:icon="@drawable/ic_itinerary"/>
+
+    <item
+        android:id="@+id/nav_tasks"
+        android:title="Tareas"
+        android:icon="@drawable/ic_tasks"/>
+
+    <item
+        android:id="@+id/nav_expenses"
+        android:title="Gastos"
+        android:icon="@drawable/ic_expenses"/>
+
+    <item
+        android:id="@+id/nav_map"
+        android:title="Mapa"
+        android:icon="@drawable/ic_map"/>
+
+    <item
+        android:id="@+id/nav_documents"
+        android:title="Documentos"
+        android:icon="@drawable/ic_documents"/>
+
+    <item
+        android:id="@+id/nav_chat"
+        android:title="Chat de Grupo"
+        android:icon="@drawable/ic_chat"/>
+
+    <item
+        android:id="@+id/nav_create_group"
+        android:title="Crear Grupo"
+        android:icon="@drawable/ic_create_group"/>
+</menu>

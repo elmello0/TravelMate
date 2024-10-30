@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <!-- Botón para volver a la pantalla de inicio -->
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/tvCreateGroupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grupo de viaje"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Lista de miembros seleccionados -->
+    <LinearLayout
+        android:id="@+id/llGroupMembers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tvCreateGroupTitle"
+        android:layout_marginTop="16dp">
+
+        <!-- Icono de miembro 1 -->
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_member"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Icono de miembro 2 -->
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_member"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Icono de miembro 3 -->
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_member" />
+    </LinearLayout>
+
+    <!-- Campo para ingresar el nombre del grupo -->
+    <EditText
+        android:id="@+id/etGroupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del grupo"
+        android:layout_below="@id/llGroupMembers"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:backgroundTint="@android:color/darker_gray" />
+
+    <!-- Campo para ingresar la descripción del grupo -->
+    <EditText
+        android:id="@+id/etGroupDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:layout_below="@id/etGroupName"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:backgroundTint="@android:color/darker_gray" />
+
+    <!-- Botones de acción -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/etGroupDescription"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnCreateGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Crear grupo"
+            android:textSize="16sp"
+            android:backgroundTint="@color/teal_200" />
+
+        <Button
+            android:id="@+id/btnAddMembers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Añadir miembros"
+            android:textSize="16sp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/white" />
+    </LinearLayout>
+
+    <!-- Botones para cancelar y guardar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/btnCreateGroup"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/red" />
+
+        <Button
+            android:id="@+id/btnSaveGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/teal_200" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/light_yellow"
+    android:gravity="center">
+
+    <!-- Imagen del avión -->
+    <ImageView
+        android:id="@+id/ivLoginIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_plane" />
+
+    <!-- Campo de correo o usuario -->
+    <EditText
+        android:id="@+id/etLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo o usuario"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo de contraseña -->
+    <EditText
+        android:id="@+id/etLoginPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:layout_marginTop="8dp" />
+
+    <!-- Botón para iniciar sesión -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iniciar"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botón para registrarse -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrarse"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

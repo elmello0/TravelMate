@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <TextView
+        android:id="@+id/tvAddExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir gastos"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Campo para el monto -->
+    <EditText
+        android:id="@+id/etAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/tvAddExpenseTitle"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para la descripción -->
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:layout_below="@id/etAmount"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para la persona que pagó -->
+    <EditText
+        android:id="@+id/etPaidBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pagado por"
+        android:layout_below="@id/etDescription"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botones de cancelar y guardar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPaidBy"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/red" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/teal_200" />
+    </LinearLayout>
+</RelativeLayout>

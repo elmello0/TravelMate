@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <!-- Botón para volver a la pantalla de inicio -->
+
+    <!-- Título de la pantalla -->
+    <TextView
+        android:id="@+id/tvAddMembersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir miembros al grupo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para buscar usuarios -->
+    <EditText
+        android:id="@+id/etSearchUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar usuario o correo"
+        android:textSize="16sp"
+        android:layout_below="@id/tvAddMembersTitle"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:backgroundTint="@android:color/darker_gray" />
+
+    <!-- Lista de usuarios disponibles -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUsers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/etSearchUser"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/llAddMembersActions" />
+
+    <!-- Botones de acción -->
+    <LinearLayout
+        android:id="@+id/llAddMembersActions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnCancelAddMembers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/red" />
+
+        <Button
+            android:id="@+id/btnSaveMembers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/teal_200" />
+    </LinearLayout>
+</RelativeLayout>

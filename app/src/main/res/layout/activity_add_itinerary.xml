@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir Itinerario"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para el título de la actividad -->
+    <EditText
+        android:id="@+id/etActivityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título de la actividad"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp" />
+
+    <!-- Campo para la descripción de la actividad -->
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:layout_below="@id/etActivityTitle"
+        android:layout_marginTop="16dp" />
+
+    <!-- Spinner para seleccionar un grupo -->
+    <Spinner
+        android:id="@+id/spinnerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDescription"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botón para seleccionar la fecha -->
+    <Button
+        android:id="@+id/btnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Fecha"
+        android:layout_below="@id/spinnerGroup"
+        android:layout_marginTop="16dp" />
+
+    <!-- Botón para seleccionar la hora -->
+    <Button
+        android:id="@+id/btnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Hora"
+        android:layout_below="@id/btnDate"
+        android:layout_marginTop="8dp" />
+
+    <!-- Botones para guardar o cancelar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnTime"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/red" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Guardar"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/teal_200" />
+    </LinearLayout>
+
+</RelativeLayout>

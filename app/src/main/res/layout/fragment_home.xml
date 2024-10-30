@@ -1,0 +1,142 @@
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF1C1"> <!-- Color beige de fondo -->
+
+    <!-- Contenido principal con ScrollView para vista de desplazamiento -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Nombre de la app en el centro -->
+            <TextView
+                android:id="@+id/appTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TravelMate"
+                android:textStyle="bold"
+                android:textSize="32sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="24dp"
+                android:gravity="center" />
+
+            <!-- ViewPager para las imágenes deslizantes -->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Indicador del ViewPager (TabLayout) -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:tabIndicatorColor="@android:color/black"
+                app:tabSelectedTextColor="@android:color/black"
+                app:tabTextColor="@android:color/black" />
+
+            <!-- GridLayout para imágenes en mosaico -->
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:columnCount="2">
+
+                <!-- Imagen 1 -->
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image1"
+                    android:scaleType="centerCrop" />
+
+                <!-- Imagen 2 -->
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image2"
+                    android:scaleType="centerCrop" />
+
+                <!-- Imagen 3 -->
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image3"
+                    android:scaleType="centerCrop" />
+
+                <!-- Imagen 4 -->
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image4"
+                    android:scaleType="centerCrop" />
+
+                <!-- Imagen 5 -->
+                <ImageView
+                    android:id="@+id/image5"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image5"
+                    android:scaleType="centerCrop" />
+
+                <!-- Imagen 6 -->
+                <ImageView
+                    android:id="@+id/image6"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    app:layout_columnWeight="1"
+                    android:src="@drawable/image6"
+                    android:scaleType="centerCrop" />
+
+            </androidx.gridlayout.widget.GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- NavigationView para perfil, ajustes, y cerrar sesión -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/nav_header" />
+
+    <!-- NavigationView para funcionalidades -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/funcionalidades_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/menu_funcionalidades" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tema principal de la app -->
+    <style name="Theme.TravelMate" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
+        <!-- Establecer fondo claro -->
+        <item name="android:windowBackground">@color/beige</item>
+
+
+        <!-- Desactivar ActionBar por defecto -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- Compatibilidad con Material Design -->
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+        <item name="android:textViewStyle">@style/Widget.MaterialComponents.TextView</item>
+    </style>
+
+    <!-- Tema sin ActionBar (útil para actividades específicas) -->
+    <style name="Theme.TravelMate.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

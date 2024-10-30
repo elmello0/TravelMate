@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_yellow">
+
+    <!-- SearchView para buscar ubicaciones -->
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:queryHint="Buscar ubicación" />
+
+    <!-- MapView para mostrar el mapa -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/searchView"
+        android:layout_above="@id/btnBackToMenu"
+        android:layout_weight="1" />
+
+    <!-- Botón para volver al menú principal (similar al botón de inicio de otras pantallas) -->
+    <Button
+        android:id="@+id/btnBackToMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inicio"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+
+</RelativeLayout>
