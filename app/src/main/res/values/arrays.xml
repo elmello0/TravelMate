@@ -1,0 +1,27 @@
+<resources>
+    <string-array name="map_suggestions">
+        <!-- Lugares comunes -->
+        <item>Plaza de Armas</item>
+        <item>Costanera Center</item>
+        <item>Estadio Nacional</item>
+        <item>Terminal Alameda</item>
+        <item>Universidad de Chile</item>
+        <item>Aeropuerto Internacional</item>
+        <item>Parque Bicentenario</item>
+        <item>Biblioteca Nacional</item>
+        <item>Cerro San Cristóbal</item>
+        <item>Palacio de La Moneda</item>
+
+        <!-- Agrega más sugerencias relevantes -->
+        <item>Clínica Las Condes</item>
+        <item>Patio Bellavista</item>
+        <item>Cerro Santa Lucía</item>
+        <item>Fantasilandia</item>
+        <item>Zoo Nacional</item>
+        <item>Quinta Normal</item>
+        <item>Puerto de Valparaíso</item>
+        <item>Viña del Mar</item>
+        <item>Pichilemu</item>
+        <item>La Serena</item>
+    </string-array>
+</resources>

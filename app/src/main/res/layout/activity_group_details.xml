@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <!-- Nombre del grupo -->
+    <TextView
+        android:id="@+id/tvGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Grupo"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Descripción del grupo -->
+    <TextView
+        android:id="@+id/tvGroupDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del grupo"
+        android:textSize="16sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Lista de miembros -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGroupMembers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/card_background_color"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
+
+    <!-- Botón para abrir el chat -->
+    <Button
+        android:id="@+id/btnOpenChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ir al Chat"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:paddingVertical="12dp"
+        android:elevation="4dp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

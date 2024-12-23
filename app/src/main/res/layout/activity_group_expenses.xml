@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarGroupExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary_color"
+        android:title="Gastos del Grupo"
+        android:titleTextColor="@color/white"
+        android:elevation="4dp" />
+
+    <!-- Contenedor del Monto Total -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardTotalAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarGroupExpenses"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        android:background="@color/card_background_color">
+
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Monto Total: $0.00"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Mensaje cuando no hay gastos -->
+    <TextView
+        android:id="@+id/tvNoExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardTotalAmount"
+        android:layout_above="@id/fabAddExpense"
+        android:gravity="center"
+        android:text="No hay gastos en este grupo"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:layout_margin="16dp"
+        android:textColor="@color/text_secondary" />
+
+    <!-- RecyclerView para mostrar los gastos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cardTotalAmount"
+        android:layout_above="@id/fabAddExpense"
+        android:layout_margin="8dp"
+        android:background="@color/card_background_color" />
+
+    <!-- Botón flotante para agregar un nuevo gasto -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:tint="@color/white"
+        app:backgroundTint="@color/button_primary"
+        android:contentDescription="Agregar gasto"
+        android:elevation="8dp" />
+</RelativeLayout>

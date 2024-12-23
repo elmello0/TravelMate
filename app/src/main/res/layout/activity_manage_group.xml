@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <TextView
+        android:id="@+id/tvManageGroupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestionar Grupo"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/etGroupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del grupo"
+        android:layout_below="@id/tvManageGroupTitle"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        android:backgroundTint="@color/text_secondary" />
+
+    <EditText
+        android:id="@+id/etGroupDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción del grupo"
+        android:layout_below="@id/etGroupName"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        android:backgroundTint="@color/text_secondary" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGroupMembers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/etGroupDescription"
+        android:layout_marginTop="16dp"
+        android:layout_above="@id/btnSaveGroupChanges"
+        android:background="@color/card_background_color"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btnSaveGroupChanges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar cambios"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:elevation="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:paddingVertical="12dp" />
+</RelativeLayout>

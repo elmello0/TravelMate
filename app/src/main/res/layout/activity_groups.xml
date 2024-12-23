@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvGroupsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis Grupos"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Lista de grupos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGroups"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvGroupsTitle"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@color/card_background_color"
+        android:scrollbars="vertical"
+        android:clipToPadding="false" />
+</RelativeLayout>

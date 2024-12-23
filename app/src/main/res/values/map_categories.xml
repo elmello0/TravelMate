@@ -1,0 +1,15 @@
+<resources>
+    <string-array name="map_categories">
+        <item>Seleccionar categoría</item>
+        <item>restaurant</item>
+        <item>hotel</item>
+        <item>bar</item>
+        <item>museum</item>
+        <item>park</item>
+        <item>shopping_mall</item>
+        <item>atm</item>
+        <item>gas_station</item>
+        <item>hospital</item>
+        <item>gym</item>
+    </string-array>
+</resources>
