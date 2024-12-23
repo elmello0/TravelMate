@@ -1,8 +1,8 @@
-// build.gradle (Módulo de Aplicación)
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -23,7 +23,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -50,21 +53,40 @@ android {
 }
 
 dependencies {
-    // Firebase BOM: controla todas las versiones de Firebase
+    // Firebase
     implementation(platform("com.google.firebase:firebase-bom:31.2.3"))
-
-    // Módulos individuales de Firebase
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-storage-ktx") // Almacenamiento de Firebase
+    implementation("com.google.firebase:firebase-storage-ktx")
 
-    // Dependencias de Android y Material Design
-    implementation("androidx.gridlayout:gridlayout:1.0.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    // Google Maps y Places API
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.libraries.places:places:3.3.0")
+
+    // Corrutinas Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+    // PageIndicatorView .aar
+    implementation(":PageIndicatorView-v.1.0.3@aar")
+
+    // Material Design
     implementation("com.google.android.material:material:1.9.0")
 
-    // Dependencias de Jetpack Compose
+    // OSMdroid
+    implementation("org.osmdroid:osmdroid-android:6.1.11")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // AndroidX
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Compose
     implementation("androidx.compose.material3:material3:1.2.0-alpha06")
     implementation("androidx.compose.ui:ui:1.5.0")
     implementation("androidx.compose.ui:ui-graphics:1.5.0")
@@ -72,21 +94,16 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
 
-    // Otras dependencias
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("org.osmdroid:osmdroid-android:6.1.11")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.14.2")
+    kapt("com.github.bumptech.glide:compiler:4.14.2")
 
-    // Dependencias para testing
+    // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.0")
 
-    // Debugging
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.0")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.0")
 }

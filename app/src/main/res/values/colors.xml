@@ -1,21 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Colores principales de la aplicación -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="primary_color">#00A6ED</color> <!-- Azul brillante -->
+    <color name="secondary_color">#F26666</color> <!-- Rojo suave -->
+    <color name="background_color">#FAF3E0</color> <!-- Amarillo claro -->
+    <color name="card_background_color">#FFF1C1</color> <!-- Beige -->
+
+    <!-- Colores adicionales con IDs originales pero tonos acordes -->
+    <color name="purple_500">#00A6ED</color>
+    <color name="purple_700">#005A9E</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="beige">#FFF1C1</color>
+
+    <!-- Colores faltantes -->
+    <color name="gray">#808080</color> <!-- Gris claro -->
+    <color name="light_yellow">#FAF3E0</color> <!-- Amarillo claro -->
+    <color name="input_background_color">#FFFFFF</color> <!-- Blanco para inputs -->
+
+    <!-- Colores de texto -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#5A5A5A</color>
+    <color name="text_hint">#808080</color>
+
+    <!-- Colores de botones -->
+    <color name="button_primary">#00A6ED</color>
+    <color name="button_secondary">#F26666</color>
 
     <!-- Colores adicionales -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#F44336</color> <!-- Color rojo -->
-    <color name="light_yellow">#FFF9C4</color> <!-- Ejemplo de amarillo claro -->
-    <color name="beige">#FFF1C1</color> <!-- Color beige de fondo -->
-
-    <!-- Colores de texto para campos de entrada -->
-    <color name="input_text_color">#FF000000</color> <!-- Color negro para el texto -->
-    <color name="input_hint_color">#FF808080</color> <!-- Color gris para los hints -->
-    <color name="input_background_color">#FFFFFFFF</color> <!-- Fondo blanco para los inputs -->
+    <color name="error_color">#F44336</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -1,9 +1,9 @@
 package com.example.travelmate
 
-import java.io.Serializable
-
 data class Expense(
-    val description: String = "",
-    val amount: Double = 0.0,
-    val paidBy: String = ""
-) : Serializable
+    var description: String = "",
+    var amount: Double = 0.0,
+    var paidBy: String = "",
+    var groupName: String = "", // Nuevo campo para asociar el gasto con un grupo
+    var documentId: String? = null
+)

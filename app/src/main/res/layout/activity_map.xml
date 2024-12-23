@@ -2,37 +2,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/light_yellow">
+    android:background="@color/background_color">
 
-    <!-- SearchView para buscar ubicaciones -->
-    <SearchView
+    <AutoCompleteTextView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:queryHint="Buscar ubicación" />
+        android:hint="Buscar ubicación"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
+        android:background="@drawable/rounded_edittext_background"
+        android:textSize="16sp" />
 
-    <!-- MapView para mostrar el mapa -->
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapView"
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_spinner_background"
+        android:padding="12dp"
+        android:entries="@array/map_categories"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/btnMapType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cambiar Mapa"
+        android:layout_below="@id/searchView"
+        android:layout_toEndOf="@id/categorySpinner"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:elevation="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/mapTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categorySpinner"
+        android:layout_marginTop="16dp"
+        android:text="Mapa Interactivo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_centerHorizontal="true" />
+
+    <fragment
+        android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/searchView"
+        android:layout_below="@id/mapTitle"
         android:layout_above="@id/btnBackToMenu"
-        android:layout_weight="1" />
+        android:layout_marginTop="8dp"
+        class="com.google.android.gms.maps.SupportMapFragment" />
 
-    <!-- Botón para volver al menú principal (similar al botón de inicio de otras pantallas) -->
     <Button
         android:id="@+id/btnBackToMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Inicio"
         android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:padding="12dp"
+        android:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:padding="12dp"
-        android:layout_marginTop="16dp" />
-
+        android:layout_marginBottom="16dp" />
 </RelativeLayout>

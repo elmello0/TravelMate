@@ -4,15 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="?attr/colorPrimary">
+    android:background="@color/primary_color"> <!-- Fondo azul brillante -->
 
-    <!-- Texto que se actualizará con el nombre de usuario -->
+    <!-- Texto estilizado para mostrar el nombre de usuario -->
     <TextView
         android:id="@+id/tvUserNameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuario"
         android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@android:color/white" />
+        android:textSize="20sp"
+    android:textColor="@color/white" />
 </LinearLayout>

@@ -1,94 +1,104 @@
 package com.example.travelmate
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
-import java.io.File
 
 class DocumentsActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var documentAdapter: DocumentAdapter
     private lateinit var documentList: ArrayList<Document>
-    private val db = FirebaseFirestore.getInstance()
-
-    private lateinit var addDocumentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var db: FirebaseFirestore
+    private lateinit var noDocumentsMessage: TextView
+    private var groupId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_documents)
 
+        // Inicializar RecyclerView y mensaje de "No hay documentos"
         recyclerView = findViewById(R.id.recyclerViewDocuments)
+        noDocumentsMessage = findViewById(R.id.tvNoDocuments)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        documentList = arrayListOf()
+        db = FirebaseFirestore.getInstance()
+        documentList = ArrayList()
 
-        addDocumentLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK && result.data != null) {
-                val documentName = result.data?.getStringExtra("document_name")
-                val documentUri = result.data?.getStringExtra("document_uri")
-
-                if (documentName != null && documentUri != null) {
-                    val newDocument = Document(documentName, documentUri)
-                    documentList.add(newDocument)
-                    documentAdapter.notifyDataSetChanged()
-                }
-            }
+        // Obtener el groupId del Intent
+        groupId = intent.getStringExtra("group_id")
+        if (groupId.isNullOrEmpty()) {
+            Toast.makeText(this, "No se pudo cargar el grupo. Verifica que estás accediendo desde un grupo válido.", Toast.LENGTH_SHORT).show()
+            finish()
+            return
         }
 
-        loadDocuments()
-
+        // Configurar el adaptador
         documentAdapter = DocumentAdapter(documentList) { document ->
             downloadDocument(document)
         }
         recyclerView.adapter = documentAdapter
 
+        // Cargar documentos asociados al grupo
+        loadDocuments()
+
+        // Configurar FloatingActionButton para añadir documentos
         val fabAddDocument = findViewById<FloatingActionButton>(R.id.fab_add_document)
         fabAddDocument.setOnClickListener {
             val intent = Intent(this, AddDocumentActivity::class.java)
-            addDocumentLauncher.launch(intent)
+            intent.putExtra("group_id", groupId) // Pasar el groupId a AddDocumentActivity
+            startActivity(intent)
         }
     }
 
     private fun loadDocuments() {
         documentList.clear()
 
-        db.collection("documents").get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val doc = document.toObject(Document::class.java)
-                    documentList.add(doc)
+        db.collection("groups")
+            .document(groupId!!)
+            .collection("documents")
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    Toast.makeText(this, "Error al cargar documentos: ${error.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("DocumentsActivity", "Error al cargar documentos", error)
+                    return@addSnapshotListener
                 }
-                documentAdapter.notifyDataSetChanged()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al cargar documentos: ${e.message}", Toast.LENGTH_SHORT).show()
+
+                if (querySnapshot != null) {
+                    documentList.clear() // Limpiar la lista actual
+                    for (document in querySnapshot) {
+                        val doc = document.toObject(Document::class.java).apply {
+                            id = document.id // Agregar el ID del documento
+                        }
+                        documentList.add(doc)
+                    }
+
+                    // Mostrar u ocultar el mensaje de "No hay documentos"
+                    if (documentList.isEmpty()) {
+                        noDocumentsMessage.visibility = View.VISIBLE
+                        recyclerView.visibility = View.GONE
+                    } else {
+                        noDocumentsMessage.visibility = View.GONE
+                        recyclerView.visibility = View.VISIBLE
+                    }
+
+                    documentAdapter.notifyDataSetChanged()
+                }
             }
     }
 
+
     private fun downloadDocument(document: Document) {
-        val uri = Uri.parse(document.filePath)
-
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(uri, "*/*")
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
-        try {
-            startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(this, "No se puede abrir el documento", Toast.LENGTH_SHORT).show()
-        }
+        // Implementar lógica para descargar documento
+        Toast.makeText(this, "Descargar documento: ${document.name}", Toast.LENGTH_SHORT).show()
     }
 }

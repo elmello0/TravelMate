@@ -50,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_manage_group -> {
+                    val intent = Intent(this, ManageGroupActivity::class.java)
+                    intent.putExtra("group_id", "el_id_de_tu_grupo") // Cambia por el ID real
+                    startActivity(intent)
+                }
                 R.id.nav_profile -> {
                     startActivity(Intent(this, ProfileActivity::class.java))
                 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/background_color"
     tools:context=".TasksActivity">
 
-    <!-- Título de la pantalla -->
     <TextView
         android:id="@+id/tv_title_tasks"
         android:layout_width="wrap_content"
@@ -15,22 +15,20 @@
         android:text="Tareas del Grupo"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp" />
 
-    <!-- Divider debajo del título -->
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="@color/text_secondary"
         app:layout_constraintTop_toBottomOf="@id/tv_title_tasks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
-    <!-- RecyclerView para mostrar las tareas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTasks"
         android:layout_width="0dp"
@@ -42,14 +40,27 @@
         android:layout_margin="16dp"
         android:scrollbars="vertical" />
 
-    <!-- Botón flotante para añadir nuevas tareas -->
+    <TextView
+        android:id="@+id/tv_empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay tareas disponibles."
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_task"
-        android:tint="@android:color/white"
-        android:backgroundTint="@color/teal_200"
+        android:tint="@color/white"
+        android:contentDescription="Añadir nueva tarea"
+        android:backgroundTint="@color/secondary_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />

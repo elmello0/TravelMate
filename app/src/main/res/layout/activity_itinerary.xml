@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/light_yellow">
+    android:background="@color/background_color">
 
     <!-- Encabezado de la pantalla -->
     <TextView
@@ -11,8 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Itinerarios"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/text_primary"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
@@ -20,9 +20,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewItinerary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_below="@id/title"
-        android:layout_marginTop="16dp" />
+        android:layout_above="@id/fab_add_itinerary"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        android:background="@color/card_background_color"
+        android:padding="8dp"
+        android:clipToPadding="false" />
 
     <!-- Botón flotante para añadir itinerarios -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,6 +38,8 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
-        android:backgroundTint="@color/red"
-        android:contentDescription="Añadir itinerario" />
+        android:tint="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:contentDescription="Añadir itinerario"
+        android:elevation="8dp" />
 </RelativeLayout>

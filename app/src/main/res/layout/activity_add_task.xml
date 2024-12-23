@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/light_yellow">
+    android:background="@color/background_color">
 
+    <!-- Título -->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -12,6 +12,7 @@
         android:text="Añadir Tareas"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/text_primary"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
@@ -21,8 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Título de la tarea"
+        android:textColorHint="@color/text_hint"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/secondary_color"
         android:layout_below="@id/title"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
 
     <!-- Campo para la descripción de la tarea -->
     <EditText
@@ -30,8 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripción"
+        android:textColorHint="@color/text_hint"
+        android:textColor="@color/text_primary"
+        android:backgroundTint="@color/secondary_color"
         android:layout_below="@id/etTaskTitle"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:padding="12dp" />
 
     <!-- Botones para guardar o cancelar -->
     <LinearLayout
@@ -47,8 +56,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancelar"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/red" />
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/error_color"
+            android:padding="12dp"
+            android:elevation="4dp" />
 
         <Button
             android:id="@+id/btnSave"
@@ -56,8 +68,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Guardar"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@color/teal_200" />
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/button_primary"
+            android:padding="12dp"
+            android:elevation="4dp" />
     </LinearLayout>
 
 </RelativeLayout>

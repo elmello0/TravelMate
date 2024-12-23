@@ -1,15 +1,13 @@
 package com.example.travelmate
 
-
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 
@@ -21,11 +19,9 @@ class AddItineraryActivity : AppCompatActivity() {
     private lateinit var timeButton: Button
     private lateinit var saveButton: Button
     private lateinit var cancelButton: Button
-    private lateinit var groupSpinner: Spinner
 
     private var selectedDate: String = ""
     private var selectedTime: String = ""
-    private var selectedGroup: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +33,6 @@ class AddItineraryActivity : AppCompatActivity() {
         timeButton = findViewById(R.id.btnTime)
         saveButton = findViewById(R.id.btnSave)
         cancelButton = findViewById(R.id.btnCancel)
-        groupSpinner = findViewById(R.id.spinnerGroup)
-
-        // Lista de grupos
-        val groupList = arrayListOf("Grupo 1", "Grupo 2", "Grupo 3")
-
-        // Configurar el Spinner con la lista de grupos
-        val groupAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, groupList)
-        groupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        groupSpinner.adapter = groupAdapter
 
         // Selector de fecha
         dateButton.setOnClickListener {
@@ -55,8 +42,8 @@ class AddItineraryActivity : AppCompatActivity() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear" // Guardar la fecha seleccionada
-                dateButton.text = selectedDate // Mostrar la fecha seleccionada en el botón
+                selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                dateButton.text = selectedDate
             }, year, month, day)
 
             datePickerDialog.show()
@@ -69,8 +56,8 @@ class AddItineraryActivity : AppCompatActivity() {
             val minute = calendar.get(Calendar.MINUTE)
 
             val timePickerDialog = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-                selectedTime = "$selectedHour:$selectedMinute" // Guardar la hora seleccionada
-                timeButton.text = selectedTime // Mostrar la hora seleccionada en el botón
+                selectedTime = "$selectedHour:$selectedMinute"
+                timeButton.text = selectedTime
             }, hour, minute, true)
 
             timePickerDialog.show()
@@ -80,30 +67,33 @@ class AddItineraryActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val description = descriptionEditText.text.toString()
-            selectedGroup = groupSpinner.selectedItem.toString()
 
             if (title.isNotEmpty() && selectedDate.isNotEmpty() && selectedTime.isNotEmpty()) {
-                // Crear el nuevo itinerario
+                // Crear el nuevo itinerario con isCompleted por defecto en false
                 val newItinerary = Itinerary(
                     title = title,
                     date = selectedDate,
                     time = selectedTime,
                     description = description,
-                    group = selectedGroup
+                    group = "", // Si ya no necesitas un grupo específico, deja este campo vacío
+                    isCompleted = false // Por defecto, los itinerarios no están completados
                 )
 
                 // Devolver el resultado a ItineraryActivity
                 val resultIntent = Intent()
                 resultIntent.putExtra("new_itinerary", newItinerary)
                 setResult(Activity.RESULT_OK, resultIntent)
-                finish() // Cerrar AddItineraryActivity y volver a ItineraryActivity
+                finish()
+            } else {
+                // Mostrar un mensaje si algún campo está vacío
+                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
             }
         }
 
         // Cancelar la operación
         cancelButton.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
-            finish() // Cerrar AddItineraryActivity
+            finish()
         }
     }
 }

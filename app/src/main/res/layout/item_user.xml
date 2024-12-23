@@ -1,19 +1,41 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_color"> <!-- Fondo amarillo claro -->
 
+    <!-- Texto para el nombre del usuario -->
     <TextView
         android:id="@+id/tvUserName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Usuario" />
+        android:text="Nombre del Usuario"
+        android:textSize="18sp"
+    android:textStyle="bold"
+    android:textColor="@color/text_primary"
+    android:paddingBottom="8dp" />
 
+    <!-- Texto para el correo del usuario -->
+    <TextView
+        android:id="@+id/tvUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email del Usuario"
+        android:textSize="16sp"
+    android:textColor="@color/text_secondary"
+    android:paddingBottom="16dp" />
+
+    <!-- Botón para añadir un usuario -->
     <Button
         android:id="@+id/btnAddUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Añadir" />
+        android:text="Añadir"
+        android:textColor="@color/white"
+    android:backgroundTint="@color/button_primary"
+    android:padding="8dp"
+    android:elevation="4dp" />
 </LinearLayout>

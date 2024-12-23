@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -46,7 +47,8 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -57,21 +59,57 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Obtener el userId y guardar la información en Firestore
                     val userId = auth.currentUser?.uid
-                    val user = hashMapOf("username" to username, "email" to email)
+                    val createdAt = Date() // Fecha y hora actual
+
+                    val user = hashMapOf(
+                        "userId" to userId,
+                        "username" to username,
+                        "email" to email,
+                        "created_at" to createdAt
+                    )
 
                     userId?.let {
                         db.collection("users").document(it).set(user)
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
+                                // Configurar el displayName en Firebase Authentication
+                                val profileUpdates =
+                                    com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                                        .setDisplayName(username) // Usar el nombre de usuario ingresado
+                                        .build()
+
+                                auth.currentUser?.updateProfile(profileUpdates)
+                                    ?.addOnCompleteListener { updateTask ->
+                                        if (updateTask.isSuccessful) {
+                                            Toast.makeText(
+                                                this,
+                                                "Cuenta creada exitosamente",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            startActivity(Intent(this, MainActivity::class.java))
+                                            finish()
+                                        } else {
+                                            Toast.makeText(
+                                                this,
+                                                "Error al actualizar perfil: ${updateTask.exception?.message}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Error al guardar datos: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                     }
                 } else {
-                    Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Error en el registro: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

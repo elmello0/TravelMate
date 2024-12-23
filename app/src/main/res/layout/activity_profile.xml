@@ -4,16 +4,18 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
-    android:background="@android:color/white">
+    android:background="@color/background_color">
 
     <TextView
         android:id="@+id/tvProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Perfil"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:layout_gravity="center" />
+        android:textColor="@color/text_primary"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -21,13 +23,19 @@
         android:layout_height="wrap_content"
         android:hint="Nombre de usuario"
         android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+        android:backgroundTint="@color/text_secondary"
+        android:padding="12dp"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnSaveProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_blue_light" />
+        android:textSize="16sp"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/white"
+        android:paddingVertical="12dp"
+        android:elevation="4dp" />
 </LinearLayout>

@@ -4,9 +4,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF1C1"> <!-- Color beige de fondo -->
+    android:background="@color/background_color">
 
-    <!-- Contenido principal con ScrollView para vista de desplazamiento -->
+    <!-- Contenido principal -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,44 +18,101 @@
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <!-- Nombre de la app en el centro -->
-            <TextView
-                android:id="@+id/appTitle"
+            <!-- Título con el ícono del avión -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TravelMate"
-                android:textStyle="bold"
-                android:textSize="32sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="24dp"
-                android:gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
 
-            <!-- ViewPager para las imágenes deslizantes -->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_plane"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/appTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TravelMate"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    android:textColor="@color/text_primary" />
+            </LinearLayout>
+
+            <!-- Sección informativa -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido a TravelMate"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Organiza tus viajes, conecta con tus compañeros y lleva un control de tus itinerarios y gastos fácilmente."
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- ViewPager para imágenes deslizantes -->
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:background="@color/card_background_color" />
 
-            <!-- Indicador del ViewPager (TabLayout) -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+            <!-- Indicador del ViewPager -->
+            <com.rd.PageIndicatorView
+                android:id="@+id/pageIndicatorView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:tabIndicatorColor="@android:color/black"
-                app:tabSelectedTextColor="@android:color/black"
-                app:tabTextColor="@android:color/black" />
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                app:piv_animationType="scale"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="@color/secondary_color"
+                app:piv_unselectedColor="@color/text_secondary"
+                app:piv_count="3" />
 
-            <!-- GridLayout para imágenes en mosaico -->
+            <!-- TabLayout -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                app:tabIndicatorColor="@color/secondary_color"
+                app:tabSelectedTextColor="@color/secondary_color"
+                app:tabTextColor="@color/text_secondary" />
+
+            <!-- Galería de imágenes -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Explora destinos populares"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
             <androidx.gridlayout.widget.GridLayout
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:columnCount="2">
+                app:columnCount="2"
+                android:layout_marginBottom="16dp">
 
-                <!-- Imagen 1 -->
                 <ImageView
                     android:id="@+id/image1"
                     android:layout_width="0dp"
@@ -63,9 +120,9 @@
                     android:layout_margin="8dp"
                     app:layout_columnWeight="1"
                     android:src="@drawable/image1"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:background="@color/card_background_color" />
 
-                <!-- Imagen 2 -->
                 <ImageView
                     android:id="@+id/image2"
                     android:layout_width="0dp"
@@ -73,9 +130,9 @@
                     android:layout_margin="8dp"
                     app:layout_columnWeight="1"
                     android:src="@drawable/image2"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:background="@color/card_background_color" />
 
-                <!-- Imagen 3 -->
                 <ImageView
                     android:id="@+id/image3"
                     android:layout_width="0dp"
@@ -83,9 +140,9 @@
                     android:layout_margin="8dp"
                     app:layout_columnWeight="1"
                     android:src="@drawable/image3"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:background="@color/card_background_color" />
 
-                <!-- Imagen 4 -->
                 <ImageView
                     android:id="@+id/image4"
                     android:layout_width="0dp"
@@ -93,50 +150,83 @@
                     android:layout_margin="8dp"
                     app:layout_columnWeight="1"
                     android:src="@drawable/image4"
-                    android:scaleType="centerCrop" />
-
-                <!-- Imagen 5 -->
-                <ImageView
-                    android:id="@+id/image5"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="8dp"
-                    app:layout_columnWeight="1"
-                    android:src="@drawable/image5"
-                    android:scaleType="centerCrop" />
-
-                <!-- Imagen 6 -->
-                <ImageView
-                    android:id="@+id/image6"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="8dp"
-                    app:layout_columnWeight="1"
-                    android:src="@drawable/image6"
-                    android:scaleType="centerCrop" />
-
+                    android:scaleType="centerCrop"
+                    android:background="@color/card_background_color" />
             </androidx.gridlayout.widget.GridLayout>
 
+            <!-- Sección de Últimas Noticias -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Últimas Noticias"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descubre Brasil: vuelos con 50% de descuento."
+                    android:textSize="16sp"
+                    android:textColor="@color/text_secondary"
+                    android:padding="8dp"
+                    android:background="@color/card_background_color"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nueva ruta: Chile a Japón desde $50.000"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_secondary"
+                    android:padding="8dp"
+                    android:background="@color/card_background_color"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+
+            <!-- Sección de Publicidad -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Publicidad"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/text_primary"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/sample_ad"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- NavigationView para perfil, ajustes, y cerrar sesión -->
+    <!-- Menús deslizable izquierdo y derecho -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         app:menu="@menu/drawer_menu"
-        app:headerLayout="@layout/nav_header" />
+        android:background="@color/card_background_color" />
 
-    <!-- NavigationView para funcionalidades -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/funcionalidades_view"
+        android:id="@+id/nav_funcionalidades"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/menu_funcionalidades" />
-
+        app:menu="@menu/menu_funcionalidades"
+        android:background="@color/card_background_color" />
 </androidx.drawerlayout.widget.DrawerLayout>

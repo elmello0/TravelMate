@@ -5,8 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
+import java.util.*
 
-class ExpenseAdapter(private val expenseList: List<Expense>) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
+class ExpenseAdapter(
+    private var expenseList: List<Expense>, // Lista original de gastos
+    private val onExpenseLongClick: (Expense) -> Unit // Callback para long click
+) : RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
 
     class ExpenseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val expenseDescription: TextView = itemView.findViewById(R.id.tvExpenseDescription)
@@ -22,10 +27,25 @@ class ExpenseAdapter(private val expenseList: List<Expense>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val currentExpense = expenseList[position]
-        holder.expenseDescription.text = currentExpense.description // Descripción del gasto
-        holder.expenseAmount.text = "$${currentExpense.amount}" // Monto del gasto con símbolo de dólar
-        holder.expensePaidBy.text = "Pagado por: ${currentExpense.paidBy}" // Persona que pagó
+
+        // Formato CLP
+        val formatCLP = NumberFormat.getCurrencyInstance(Locale("es", "CL"))
+
+        holder.expenseDescription.text = currentExpense.description
+        holder.expenseAmount.text = formatCLP.format(currentExpense.amount)
+        holder.expensePaidBy.text = "Pagado por: ${currentExpense.paidBy}"
+
+        // Lógica para eliminar gasto al hacer long click
+        holder.itemView.setOnLongClickListener {
+            onExpenseLongClick(currentExpense)
+            true
+        }
     }
 
-    override fun getItemCount() = expenseList.size
+    override fun getItemCount(): Int = expenseList.size
+
+    fun updateExpenses(newExpenses: List<Expense>) {
+        this.expenseList = newExpenses
+        notifyDataSetChanged() // Notificar cambios en los datos
+    }
 }

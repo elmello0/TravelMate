@@ -1,6 +1,7 @@
 package com.example.travelmate
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
@@ -52,7 +54,11 @@ class AddDocumentActivity : AppCompatActivity() {
             if (documentName.isNotEmpty() && selectedFileUri != null) {
                 uploadFileToFirebase(documentName, selectedFileUri!!)
             } else {
-                Toast.makeText(this, "Por favor, selecciona un archivo y añade un nombre", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Por favor, selecciona un archivo y añade un nombre",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -63,35 +69,66 @@ class AddDocumentActivity : AppCompatActivity() {
     }
 
     private fun uploadFileToFirebase(documentName: String, fileUri: Uri) {
-        // Create a unique path for the file in Firebase Storage
+        val groupId = intent.getStringExtra("group_id")
+        if (groupId.isNullOrEmpty()) {
+            Toast.makeText(
+                this,
+                "No se especificó el grupo para este documento.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "Por favor, inicia sesión.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Mostrar ProgressDialog
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Subiendo archivo...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
         val fileRef = storage.reference.child("documents/${UUID.randomUUID()}")
 
-        // Upload the file to Firebase Storage
         fileRef.putFile(fileUri)
             .addOnSuccessListener {
-                // Get the download URL after uploading
                 fileRef.downloadUrl.addOnSuccessListener { downloadUrl ->
-                    saveDocumentToFirestore(documentName, downloadUrl.toString())
+                    saveDocumentToFirestore(
+                        documentName,
+                        downloadUrl.toString(),
+                        currentUser.displayName ?: "Usuario desconocido",
+                        groupId
+                    )
+                    progressDialog.dismiss()
                 }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al subir archivo: ${e.message}", Toast.LENGTH_SHORT).show()
+                progressDialog.dismiss()
             }
     }
 
-    private fun saveDocumentToFirestore(name: String, fileUrl: String) {
-        val document = Document(name = name, filePath = fileUrl)
-        db.collection("documents").add(document)
+    private fun saveDocumentToFirestore(name: String, fileUrl: String, uploadedBy: String, groupId: String) {
+        val document = Document(
+            name = name,
+            filePath = fileUrl,
+            uploadedBy = uploadedBy,
+            uploadedAt = System.currentTimeMillis()
+        )
+
+        db.collection("groups")
+            .document(groupId)
+            .collection("documents")
+            .add(document)
             .addOnSuccessListener {
-                Toast.makeText(this, "Documento añadido", Toast.LENGTH_SHORT).show()
-                val resultIntent = Intent()
-                resultIntent.putExtra("document_name", name)
-                resultIntent.putExtra("document_uri", fileUrl)
-                setResult(Activity.RESULT_OK, resultIntent)
+                Toast.makeText(this, "Documento añadido correctamente.", Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al guardar documento en Firestore: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al guardar documento: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -109,7 +146,9 @@ class AddDocumentActivity : AppCompatActivity() {
                     if (it.moveToFirst()) {
                         val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                         val fileName = it.getString(nameIndex)
-                        documentNameEditText.setText(fileName)
+                        if (documentNameEditText.text.isEmpty()) {
+                            documentNameEditText.setText(fileName)
+                        }
                     }
                 }
             } else {

@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.rd.PageIndicatorView
 
 class HomeFragment : Fragment() {
 
@@ -23,9 +25,10 @@ class HomeFragment : Fragment() {
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var handler: Handler
     private var currentPage = 0
+    private lateinit var pageIndicatorView: PageIndicatorView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
-    private lateinit var funcionalidadesNavView: NavigationView
+    private lateinit var navFuncionalidades: NavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,35 +36,71 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        viewPager = view.findViewById(R.id.viewPager)
-        imageAdapter = ImageAdapter(requireContext(), getImageList())
-        viewPager.adapter = imageAdapter
+        try {
+            // Inicializar el ViewPager y TabLayout
+            viewPager = view.findViewById(R.id.viewPager)
+            imageAdapter = ImageAdapter(requireContext(), getImageList())
+            viewPager.adapter = imageAdapter
 
-        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
-        tabLayout.setupWithViewPager(viewPager)
+            val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
+            tabLayout.setupWithViewPager(viewPager)
 
-        handler = Handler(Looper.getMainLooper())
-        startAutoSlide()
+            // Configurar PageIndicatorView
+            pageIndicatorView = view.findViewById(R.id.pageIndicatorView)
+            pageIndicatorView.setCount(imageAdapter.count)
+            viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-        drawerLayout = view.findViewById(R.id.drawer_layout)
-        navView = view.findViewById(R.id.nav_view)
-        funcionalidadesNavView = view.findViewById(R.id.funcionalidades_view)
+                override fun onPageSelected(position: Int) {
+                    pageIndicatorView.selection = position
+                }
 
-        // Debugging adicional para verificar la configuración del menú
-        Log.d("HomeFragment", "Setting up navigation listeners")
+                override fun onPageScrollStateChanged(state: Int) {}
+            })
 
-        navView.setNavigationItemSelectedListener { menuItem ->
-            Toast.makeText(context, "Selected: ${menuItem.title}", Toast.LENGTH_SHORT).show()
-            handleMenuItem(menuItem)
-            drawerLayout.closeDrawers()
-            true
-        }
+            // Configurar el deslizamiento automático
+            handler = Handler(Looper.getMainLooper())
+            startAutoSlide()
 
-        funcionalidadesNavView.setNavigationItemSelectedListener { menuItem ->
-            Toast.makeText(context, "Selected: ${menuItem.title}", Toast.LENGTH_SHORT).show()
-            handleFuncionalidadesMenu(menuItem)
-            drawerLayout.closeDrawers()
-            true
+            // Inicializar DrawerLayout y NavigationViews
+            drawerLayout = view.findViewById(R.id.drawer_layout)
+            navView = view.findViewById(R.id.nav_view)
+            navFuncionalidades = view.findViewById(R.id.nav_funcionalidades)
+
+            // Configurar eventos del NavigationView izquierdo
+            navView.setNavigationItemSelectedListener { menuItem ->
+                Toast.makeText(context, "Selected: ${menuItem.title}", Toast.LENGTH_SHORT).show()
+                handleMenuItem(menuItem)
+                drawerLayout.closeDrawers()
+                true
+            }
+
+            // Configurar eventos del NavigationView derecho
+            navFuncionalidades.setNavigationItemSelectedListener { menuItem ->
+                Toast.makeText(context, "Funcionalidad seleccionada: ${menuItem.title}", Toast.LENGTH_SHORT).show()
+                handleFuncionalidadesMenu(menuItem)
+                drawerLayout.closeDrawer(GravityCompat.END)
+                true
+            }
+
+            // Listener para gestionar el estado del DrawerLayout
+            drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+                override fun onDrawerOpened(drawerView: View) {
+                    if (drawerView.id == R.id.nav_funcionalidades) {
+                        Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onDrawerClosed(drawerView: View) {
+                    if (drawerView.id == R.id.nav_funcionalidades) {
+                        Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onDrawerStateChanged(newState: Int) {}
+            })
+
+        } catch (e: Exception) {
+            Log.e("HomeFragment", "Error initializing views: ${e.message}")
         }
 
         return view
@@ -98,13 +137,34 @@ class HomeFragment : Fragment() {
 
     private fun handleFuncionalidadesMenu(menuItem: MenuItem) {
         when (menuItem.itemId) {
-            R.id.nav_itineraries -> startActivity(Intent(activity, ItineraryActivity::class.java))
-            R.id.nav_tasks -> startActivity(Intent(activity, TasksActivity::class.java))
-            R.id.nav_expenses -> startActivity(Intent(activity, ExpensesActivity::class.java))
+            R.id.nav_itineraries -> {
+                val intent = Intent(activity, UserGroupsActivity::class.java)
+                intent.putExtra("viewType", "itineraries")
+                startActivity(intent)
+            }
+            R.id.nav_tasks -> {
+                val intent = Intent(activity, UserGroupsActivity::class.java)
+                intent.putExtra("viewType", "tasks")
+                startActivity(intent)
+            }
+            R.id.nav_expenses -> {
+                val intent = Intent(activity, UserGroupsActivity::class.java)
+                intent.putExtra("viewType", "expenses")
+                startActivity(intent)
+            }
             R.id.nav_map -> startActivity(Intent(activity, MapActivity::class.java))
-            R.id.nav_documents -> startActivity(Intent(activity, DocumentsActivity::class.java))
-            R.id.nav_chat -> startActivity(Intent(activity, ChatActivity::class.java))
+            R.id.nav_documents -> {
+                val intent = Intent(activity, UserGroupsActivity::class.java)
+                intent.putExtra("viewType", "documents")
+                startActivity(intent)
+            }
+            R.id.nav_chat -> startActivity(Intent(activity, ChatsActivity::class.java))
             R.id.nav_create_group -> startActivity(Intent(activity, CreateGroupActivity::class.java))
+            R.id.nav_manage_group -> {
+                val intent = Intent(activity, UserGroupsActivity::class.java)
+                intent.putExtra("viewType", "manage_groups")
+                startActivity(intent)
+            }
         }
     }
 

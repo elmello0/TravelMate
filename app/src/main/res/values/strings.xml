@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TravelMate</string>
+    <string name="message_image">Imagen del mensaje</string>
+    <string name="default_notification_channel_id">default_channel</string>
+    <string name="image_description">Imagen del carrusel</string>
+
 </resources>

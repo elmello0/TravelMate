@@ -3,15 +3,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/light_yellow"
+    android:background="@color/background_color"
     android:gravity="center">
 
     <!-- Imagen del avión -->
     <ImageView
         android:id="@+id/ivLoginIcon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/ic_plane" />
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/ic_plane"
+
+        android:contentDescription="Ícono de inicio de sesión"
+        android:layout_marginBottom="16dp" />
 
     <!-- Campo de correo o usuario -->
     <EditText
@@ -19,7 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Correo o usuario"
-        android:layout_marginTop="16dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_hint"
+        android:padding="12dp"
+        android:background="@drawable/input_field"
+        android:layout_marginBottom="12dp" />
 
     <!-- Campo de contraseña -->
     <EditText
@@ -28,7 +36,12 @@
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:layout_marginTop="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_hint"
+        android:padding="12dp"
+        android:background="@drawable/input_field"
+        android:layout_marginBottom="16dp" />
 
     <!-- Botón para iniciar sesión -->
     <Button
@@ -36,9 +49,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iniciar"
-        android:backgroundTint="@color/teal_200"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp" />
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_primary"
+        android:elevation="4dp"
+        android:paddingVertical="12dp"
+        android:layout_marginBottom="12dp" />
 
     <!-- Botón para registrarse -->
     <Button
@@ -46,7 +62,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Registrarse"
-        android:backgroundTint="@color/teal_200"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/button_secondary"
+        android:elevation="4dp"
+        android:paddingVertical="12dp" />
 </LinearLayout>

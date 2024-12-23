@@ -4,15 +4,16 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
-    android:background="@android:color/white">
+    android:background="@color/background_color">
 
     <TextView
         android:id="@+id/tvSettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ajustes"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/text_primary"
         android:layout_gravity="center" />
 
     <Button
@@ -20,6 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cambiar Tema"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_blue_light" />
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/button_primary"
+        android:elevation="4dp"
+        android:paddingVertical="12dp" />
 </LinearLayout>

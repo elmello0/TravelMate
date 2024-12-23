@@ -1,11 +1,14 @@
 package com.example.travelmate
 
 import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AddExpenseActivity : AppCompatActivity() {
 
@@ -15,9 +18,20 @@ class AddExpenseActivity : AppCompatActivity() {
     private lateinit var btnSave: Button
     private lateinit var btnCancel: Button
 
+    private var groupId: String? = null
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expense)
+
+        // Obtener el groupId desde el Intent
+        groupId = intent.getStringExtra("group_id")
+        if (groupId.isNullOrEmpty()) {
+            Toast.makeText(this, "No se recibió el ID del grupo", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
         etDescription = findViewById(R.id.etDescription)
         etAmount = findViewById(R.id.etAmount)
@@ -30,16 +44,14 @@ class AddExpenseActivity : AppCompatActivity() {
             val amountText = etAmount.text.toString().trim()
             val paidBy = etPaidBy.text.toString().trim()
 
-            if (description.isNotEmpty() && amountText.isNotEmpty() && paidBy.isNotEmpty()) {
+            resetFieldBorders()
+
+            if (validateFields(description, amountText, paidBy)) {
                 val amount = amountText.toDoubleOrNull()
                 if (amount != null) {
-                    val resultIntent = intent
-                    resultIntent.putExtra("expense_description", description)
-                    resultIntent.putExtra("expense_amount", amount)
-                    resultIntent.putExtra("expense_paid_by", paidBy)
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
+                    saveExpense(description, amount, paidBy)
                 } else {
+                    showErrorBorder(etAmount)
                     Toast.makeText(this, "Por favor, ingresa un monto válido", Toast.LENGTH_SHORT).show()
                 }
             } else {
@@ -51,5 +63,57 @@ class AddExpenseActivity : AppCompatActivity() {
             setResult(Activity.RESULT_CANCELED)
             finish()
         }
+    }
+
+    private fun validateFields(description: String, amount: String, paidBy: String): Boolean {
+        var isValid = true
+        if (description.isEmpty()) {
+            showErrorBorder(etDescription)
+            isValid = false
+        }
+        if (amount.isEmpty()) {
+            showErrorBorder(etAmount)
+            isValid = false
+        }
+        if (paidBy.isEmpty()) {
+            showErrorBorder(etPaidBy)
+            isValid = false
+        }
+        return isValid
+    }
+
+    private fun showErrorBorder(editText: EditText) {
+        val drawable = GradientDrawable()
+        drawable.setStroke(4, Color.RED)
+        drawable.cornerRadius = 8f
+        editText.background = drawable
+    }
+
+    private fun resetFieldBorders() {
+        etDescription.setBackgroundResource(R.drawable.input_field)
+        etAmount.setBackgroundResource(R.drawable.input_field)
+        etPaidBy.setBackgroundResource(R.drawable.input_field)
+    }
+
+    private fun saveExpense(description: String, amount: Double, paidBy: String) {
+        val expense = Expense(
+            description = description,
+            amount = amount,
+            paidBy = paidBy
+        )
+
+        // Guardar el gasto en Firestore dentro del grupo
+        db.collection("groups")
+            .document(groupId!!)
+            .collection("expenses")
+            .add(expense)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Gasto agregado con éxito", Toast.LENGTH_SHORT).show()
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al agregar el gasto: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

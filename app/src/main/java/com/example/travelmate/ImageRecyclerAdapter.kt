@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelmate.R
 
 class ImageRecyclerAdapter(private val imageList: List<Int>) :
     RecyclerView.Adapter<ImageRecyclerAdapter.ImageViewHolder>() {
@@ -24,7 +25,15 @@ class ImageRecyclerAdapter(private val imageList: List<Int>) :
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
 
         fun bind(imageRes: Int) {
+            // Set the image
             imageView.setImageResource(imageRes)
+
+            // Add a smooth fade-in animation for when the image is loaded
+            imageView.alpha = 0f
+            imageView.animate().alpha(1f).setDuration(500).start()
+
+            // Optional: Set corner radius or shadow if item_image.xml supports it
+            imageView.clipToOutline = true
         }
     }
 }

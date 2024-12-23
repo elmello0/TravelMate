@@ -2,24 +2,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:background="@color/card_background_color"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp">
 
-    <!-- Nombre del remitente -->
     <TextView
         android:id="@+id/senderName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre del remitente"
         android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="18sp"
+        android:textColor="@color/text_primary"
+        android:paddingBottom="4dp" />
 
-    <!-- Contenido del mensaje -->
     <TextView
         android:id="@+id/messageContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Contenido del mensaje"
-        android:textSize="14sp"
-        android:paddingTop="4dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text_secondary"
+        android:paddingBottom="8dp" />
 
+    <ImageView
+        android:id="@+id/messageImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="8dp"
+        android:background="@color/card_background_color" />
+
+    <TextView
+        android:id="@+id/messageDocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Documento adjunto"
+        android:textStyle="italic"
+        android:textSize="14sp"
+        android:textColor="@color/secondary_color" />
 </LinearLayout>
